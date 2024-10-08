@@ -5,5 +5,6 @@ from core import views
 app_name = 'core'
 
 urlpatterns = [
-    path('', views.news, name='news'),
+    path('', views.catalogue, name='catalogue'),
+    path('item/<int:item_id>/', views.item, name='item'),
 ]

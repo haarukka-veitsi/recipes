@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>{{ item.name }}</title>
+	<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        {% include 'core/header.html' %}
+    </header>
+    <div class="content">
+        <div class="recipe-container">
+            <h1 class="recipe">{{ item.name }}</h1>
+
+<!--            <p class="author">Автор: Имя Автора</p>-->
+
+            <div class="recipe-meta">
+                <span class="meta-item">
+                    <i class="far fa-clock"></i>
+                    {% if item.cooking_time %}
+                        {{ item.cooking_time }}
+                    {% else %}
+                         -
+                    {% endif %}
+                </span>
+                <span class="meta-item">
+                    <i class="fas fa-utensils"></i>
+                    {% if item.servings %}
+                        {{ item.servings }}
+                    {% else %}
+                         -
+                    {% endif %}
+                </span>
+            </div>
+
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="recipe-image">
+            {% endif %}
+
+            <p class="description">{{ item.description }}</p>
+
+            <h2 class="section-title">Ингредиенты</h2>
+            <ul class="ingredients">
+                {% for ingredient in ingredients %}
+                    <li><span class="ingredient-name">{{ ingredient.name }}</span><span class="ingredient-quantity">{{ ingredient.quantity }}</span></li>
+                {% endfor %}
+            </ul>
+
+            <h2 class="section-title">Инструкция</h2>
+            {% for step in steps %}
+                <div class="step">
+                    <h3>Шаг {{step.number}}{% if step.name %}: {{step.name}}{% endif %}</h3>
+                    {% if step.image %}
+                        <img src="{{ step.image.url }}" alt="Шаг {{ step.number }}" class="step-image">
+                    {% endif %}
+                    <p>{{ step.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

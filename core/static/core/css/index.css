@@ -3,6 +3,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
+  font-family: 'Comfortaa';
 }
 
 /* Стили для шапки сайта */
@@ -19,7 +20,6 @@ header * {
 }
 
 header li, a, button {
-  font-family: 'Comfortaa';
   font-size: 13px;
   color: #212121;
   text-decoration: none;
@@ -102,7 +102,6 @@ header button:hover {
 }
 
 .recipe-info {
-  font-family: 'Comfortaa';
   color: #212121;
   display: flex;
   flex-direction: column;
@@ -141,6 +140,92 @@ header button:hover {
 
 .recipe-card-button:hover {
   background-color: #11215e;
+}
+
+/* Стили для странички рецепта */
+.recipe-container {
+    width: 80%;
+    padding: 40px;
+    background-color: #EBEAEA;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Центрируем текст */
+    box-sizing: border-box;
+}
+
+.recipe h1 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.author {
+    font-size: 13px;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+.recipe-meta {
+    display: flex;
+    justify-content: center; /* Центрируем элементы */
+    margin: 20px 0;
+}
+
+.meta-item {
+    margin: 0 15px; /* Отступы между иконками */
+    font-size: 15px;
+}
+
+.recipe-image {
+    width: 50%; /* Ширина изображения 50% */
+    height: auto;
+    border-radius: 25px;
+    margin: 20px auto; /* Центрируем изображение */
+}
+
+.description {
+    margin: 15px 0;
+    font-style: italic;
+    margin-bottom: 80px;
+}
+
+.section-title {
+    text-align: left; /* Выравнивание заголовков по левому краю */
+    margin-top: 20px;
+}
+
+.ingredients {
+    list-style-type: none;
+    margin-bottom: 80px; /* Добавляем отступ между ингредиентами и инструкцией */
+    padding: 0;
+}
+
+.ingredients li {
+    display: flex; /* Используем flexbox для размещения */
+    justify-content: space-between; /* Разделяем ингредиенты и количество */
+    align-items: center; /* Выравниваем по центру */
+    border-bottom: 1px solid #ddd; /* Линия снизу */
+    padding: 8px 0; /* Отступы сверху и снизу */
+}
+
+.step {
+    margin: 40px 0;
+    text-align: left;
+}
+
+.step h3 {
+    color: #333;
+}
+
+.step-image {
+    width: 50%;
+    height: auto;
+    border-radius: 25px;
+
+}
+
+.step p {
+    color: #333;
+
 }
 
 /* Подключение шрифтов */

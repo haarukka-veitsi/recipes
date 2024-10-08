@@ -1,21 +1,24 @@
 from django.contrib import admin
 
-from core.models import Item, ItemCategory
+from core.models import Item, ItemCategory, ItemIngredient, ItemStep
 
 
 @admin.register(Item)
 class Item(admin.ModelAdmin):
-    list_display = ('title',)
-
-    @admin.display(description='title')
-    def title(self, obj):
-        return f'{obj.name} ({obj.id})'
+    list_display = ('id', 'name',)
 
 
 @admin.register(ItemCategory)
 class ItemCategory(admin.ModelAdmin):
-    list_display = ('category',)
+    list_display = ('id', 'name',)
 
-    @admin.display(description='category')
-    def category(self, obj):
-        return f'{obj.name} ({obj.id})'
+
+@admin.register(ItemIngredient)
+class ItemIngredient(admin.ModelAdmin):
+    list_display = ('id', 'item', 'name',)
+
+
+@admin.register(ItemStep)
+class ItemStep(admin.ModelAdmin):
+    list_display = ('id', 'item', 'number')
+
