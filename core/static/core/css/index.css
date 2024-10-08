@@ -1,0 +1,155 @@
+body {
+  background: linear-gradient(116.44deg, #354B9A 0%, #9AB1D1 40.77%, #AFC6DC 54.88%, #E4C9BE 73.87%, #E3B3E8 99.45%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+/* Стили для шапки сайта */
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 5%;
+  background-color: #EBEAEA;
+}
+
+header * {
+  box-sizing: border-box;
+}
+
+header li, a, button {
+  font-family: 'Comfortaa';
+  font-size: 13px;
+  color: #212121;
+  text-decoration: none;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+}
+
+header p.logo {
+  font-family: 'Pacifico';
+  color: #354B9A;
+  font-size: 35px;
+}
+
+.nav__links {
+  list-style: none;
+  margin: 0 20px;
+}
+
+.nav__links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.nav__links li a {
+  transition: all 0.3s ease;
+}
+
+.nav__links li a:hover {
+  text-decoration: underline dotted;
+}
+
+.nav__links li a.active {
+  text-decoration: underline;
+}
+
+header button {
+  font-size: 15px;
+  padding: 10px 30px;
+  background-color: #354B9A;
+  color: #EBEAEA;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+header button:hover {
+  background-color: #11215e;
+}
+
+/* Стили для каталога рецептов */
+.content {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.recipe-card {
+  display: flex;
+  background-color: #EBEAEA;
+  border-radius: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.recipe-card img {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.recipe-info {
+  font-family: 'Comfortaa';
+  color: #212121;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.recipe-info h2 {
+  margin: 0 0 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-info p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.recipe-card-button {
+  padding: 10px 20px;
+  background-color: #354B9A;
+  color: #EBEAEA;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.recipe-card-button:hover {
+  background-color: #11215e;
+}
+
+/* Подключение шрифтов */
+@font-face {
+  font-family: "Pacifico";
+  src: url("../fonts/Pacifico-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("../fonts/Comfortaa-VariableFont_wght.ttf") format("truetype");
+}

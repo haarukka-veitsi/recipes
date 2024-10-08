@@ -1,0 +1,6 @@
+media/
+venv/
+__pycache__/
+.idea
+db.sqlite3
+recipes/local_settings.py
