@@ -1,0 +1,87 @@
+body {
+    background: linear-gradient(116.44deg, #354B9A 0%, #9AB1D1 40.77%, #AFC6DC 54.88%, #E4C9BE 73.87%, #E3B3E8 99.45%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+body {
+    font-family: 'Comfortaa';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #EBEAEA;
+    padding: 40px;
+    border-radius: 50px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #A6BED7;
+    background-color: #EBEAEA;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+.btn {
+    font-family: 'Comfortaa';
+    width: auto;
+    font-size: 17px;
+    padding: 15px 50px;
+    background-color: #354B9A;
+    color: #EBEAEA;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.btn:hover {
+    background-color: #11215e;
+}
+
+.register-question {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-question a {
+    color: #354B9A;
+    text-decoration: none;
+}
+
+.register-question a:hover {
+    text-decoration: underline;
+}
+
+/* надо дописать класс error message */
+
+@font-face {
+    font-family: "Comfortaa";
+    src: url("../fonts/Comfortaa-VariableFont_wght.ttf") format("truetype");
+  }

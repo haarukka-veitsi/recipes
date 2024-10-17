@@ -11,12 +11,11 @@
     <header>
         {% include 'core/header.html' %}
     </header>
-    <div class="content">
-        <div class="container">
-            {% for item in items %}
-                {% include 'core/card.html' %}
-            {% endfor %}
-        </div>
-    </div>
+    <p>It's yours profile</p>
+    <br>
+    {% if request.user.is_authenticated %}
+        <p>{{ request.user.username }}</p>
+    {% endif %}
+    <button><a href="{% url 'core:logout' %}">log out</a></button>
 </body>
 </html>
