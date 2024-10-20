@@ -10,5 +10,5 @@
     </ul>
 </nav>
 {% if not request.user.is_authenticated %}
-    <a class="cta" href="{% url 'core:authorize' %}"><button>Войти</button></a>
+    <a href="{% url 'core:authorize' %}"><button>Войти</button></a>
 {% endif %}

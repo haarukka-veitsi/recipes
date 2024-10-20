@@ -1,12 +1,4 @@
 body {
-    background: linear-gradient(116.44deg, #354B9A 0%, #9AB1D1 40.77%, #AFC6DC 54.88%, #E4C9BE 73.87%, #E3B3E8 99.45%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-}
-
-body {
-    font-family: 'Comfortaa';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,8 +72,3 @@ input {
 }
 
 /* надо дописать класс error message */
-
-@font-face {
-    font-family: "Comfortaa";
-    src: url("../fonts/Comfortaa-VariableFont_wght.ttf") format("truetype");
-  }

@@ -37,7 +37,7 @@ class AuthorizeView(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return render(request, 'core/profile.html')
+            return redirect('core:profile')
 
         else:
             messages.error(request, 'Неправильно введён логин или пароль')
@@ -83,4 +83,7 @@ def logout_view(request):
 
 
 def profile(request):
-    return render(request, 'core/profile.html')
+    context = {
+        'items': Item.objects.all(),
+    }
+    return render(request, 'core/profile.html', context)
