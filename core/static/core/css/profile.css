@@ -121,17 +121,14 @@ body {
     margin-right: 10px;
 }
 
-.add-button {
+.add-item {
     width: 6vh;
     height: 6vh;
-    font-size: 4vh;
-    color: #EBEAEA;
-    background-color: #354B9A;
-    border: none;
-    border-radius: 50%;
     cursor: pointer;
+    transition: all 0.3s ease;
+
 }
 
-.add-button:hover {
-    background-color: #11215e;
+.add-item:hover {
+    filter: brightness(0.7);
 }

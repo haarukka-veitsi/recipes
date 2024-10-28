@@ -1,24 +1,27 @@
+{% extends 'core/base_with_header.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-    <title>Семейные рецепты</title>
-	<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/header.css' %}">
+{% block extra_head %}
+
     <link rel="stylesheet" href="{% static 'core/css/item_card.css' %}">
-</head>
-<body>
-    <header>
-        {% include 'core/header.html' %}
-    </header>
-    <div class="content">
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% if items %}
+
         <div class="container">
             {% for item in items %}
                 {% include 'core/card.html' %}
             {% endfor %}
         </div>
-    </div>
-</body>
-</html>
+
+    {% else %}
+
+        <div>Упс! Что-то сломалось или пока нет рецептов...</div>
+
+    {% endif %}
+
+{% endblock %}

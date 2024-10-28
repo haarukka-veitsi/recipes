@@ -1,6 +1,12 @@
+{% load static %}
+
 <div class="recipe-card">
     <div class="recipe-card-img-wrap">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        {% else %}
+            <img src="{% static 'core/images/item_card.png' %}" alt="{{ item.name }}">
+        {% endif %}
     </div>
     <div class="recipe-info">
         <div>

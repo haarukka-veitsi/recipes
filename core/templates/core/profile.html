@@ -1,22 +1,20 @@
+{% extends 'core/base_with_header.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{% static 'core/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/header.css' %}">
+
+{% block extra_head %}
+
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <link rel="stylesheet" href="{% static 'core/css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/item_card.css' %}">
-    <title>Профиль</title>
-</head>
-<body>
-    <header>
-        {% include 'core/header.html' %}
-    </header>
+
+{% endblock %}
+
+
+{% block base_content %}
+
     <div class="profile-container">
-        <img src="https://via.placeholder.com/200" alt="Фотография пользователя" class="profile-photo">
+        <img src="{% static 'core/images/profile.png' %}" alt="Фотография пользователя" class="profile-photo">
         <div class="info-container">
             <div class="name-container">
                 <h1 class="name">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
@@ -24,7 +22,7 @@
             </div>
         </div>
         <div class="button-container">
-            <a href="#"><button class="edit-button">&#9998;</button></a>
+            <a href="#"><img src="{% static 'core/images/edit_profile.png' %}" alt="Изменение профиля" class="add-item"></a>
             <a href="{% url 'core:logout' %}"><button class="logout-button">Выйти</button></a>
         </div>
     </div>
@@ -35,15 +33,25 @@
         </div>
         <div class="add-recipe-content">
             <span class="add-recipe-label">Добавить новый рецепт</span>
-            <button class="add-button">+</button>
+            <a href="{% url 'core:add_item' %}">
+                <img src="{% static 'core/images/add_item.png' %}" alt="Добавление рецепта" class="add-item">
+            </a>
         </div>
     </div>
     <div class="content">
-        <div class="container">
-            {% for item in items %}
-                {% include 'core/card.html' %}
-            {% endfor %}
-        </div>
+        {% if items %}
+
+            <div class="container">
+                {% for item in items %}
+                    {% include 'core/card.html' %}
+                {% endfor %}
+            </div>
+
+        {% else %}
+
+            <div>Упс! Что-то сломалось или пока нет рецептов...</div>
+
+        {% endif %}
     </div>
-</body>
-</html>
+
+{% endblock %}

@@ -4,27 +4,31 @@ from django.views import View
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from django.forms import modelformset_factory
 
 from core.models import Item, ItemIngredient, ItemStep
+from core.forms import ItemForm, ItemIngredientForm, ItemStepForm
 
 
-def catalogue(request):
-    context = {
-        'items': Item.objects.all(),
-    }
-    return render(request, 'core/index.html', context)
+class CatalogueView(View):
+    def get(self, request):
+        context = {
+            'items': Item.objects.all().order_by('-id'),
+        }
+        return render(request, 'core/index.html', context)
 
 
-def item(request, item_id):
-    item = get_object_or_404(Item, id=item_id)
-    steps = ItemStep.objects.filter(item=item_id)
-    ingredients = ItemIngredient.objects.filter(item=item_id)
-    context = {
-        'item': item,
-        'steps': steps,
-        'ingredients': ingredients,
-    }
-    return render(request, 'core/item.html', context)
+class ItemView(View):
+    def get(self, request, item_id):
+        item = get_object_or_404(Item, id=item_id)
+        steps = ItemStep.objects.filter(item=item_id)
+        ingredients = ItemIngredient.objects.filter(item=item_id)
+        context = {
+            'item': item,
+            'steps': steps,
+            'ingredients': ingredients,
+        }
+        return render(request, 'core/item.html', context)
 
 
 class AuthorizeView(View):
@@ -76,14 +80,64 @@ class RegisterView(View):
         return render(request, 'core/profile.html')
 
 
-def logout_view(request):
-    logout(request)
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
 
-    return redirect('core:catalogue')
+        return redirect('core:catalogue')
 
 
-def profile(request):
-    context = {
-        'items': Item.objects.all(),
-    }
-    return render(request, 'core/profile.html', context)
+class ProfileView(View):
+    def get(self, request):
+        context = {
+            'items': Item.objects.all().order_by('-id'),
+        }
+        return render(request, 'core/profile.html', context)
+
+
+class AddItemView(View):
+    def get(self, request):
+        step = request.session.get('form_step', 1)
+
+        if step == 1:
+            form = ItemForm()
+        elif step == 2:
+            form = ItemIngredientForm()
+        elif step == 3:
+            form = ItemStepForm()
+        else:
+            return redirect('core:profile')
+
+        return render(request, 'core/add_item.html', {'form': form, 'step': step})
+
+    def post(self, request):
+        step = request.session.get('form_step', 1)
+
+        if step == 1:
+            form = ItemForm(request.POST)
+            if form.is_valid():
+                item = form.save()
+                request.session['item_id'] = item.id
+                request.session['form_step'] = 2
+                return redirect('core:add_item')
+
+        elif step == 2:
+            form = ItemIngredientForm(request.POST)
+            if form.is_valid():
+                ingredient = form.save(commit=False)
+                ingredient.item_id = request.session.get('item_id')
+                ingredient.save()
+                request.session['form_step'] = 3
+                return redirect('core:add_item')
+
+        elif step == 3:
+            form = ItemStepForm(request.POST)
+            if form.is_valid():
+                step_instance = form.save(commit=False)
+                step_instance.item_id = request.session.get('item_id')
+                step_instance.number = 1
+                step_instance.save()
+                del request.session['form_step']
+                return redirect('core:profile')
+
+        return render(request, 'core:add_item.html', {'form': form, 'step': step})

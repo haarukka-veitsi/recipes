@@ -7,20 +7,15 @@ body {
 
 .container {
     background-color: #EBEAEA;
+    width: 70hv;
     padding: 40px;
     border-radius: 50px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 380px;
     box-sizing: border-box;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 label {
@@ -28,13 +23,19 @@ label {
     margin-bottom: 5px;
 }
 
-input {
+input, textarea, select {
     width: 100%;
     padding: 10px;
     border: 3px solid #A6BED7;
     background-color: #EBEAEA;
     border-radius: 25px;
     box-sizing: border-box;
+    font-family: 'Comfortaa';
+}
+
+.error-message{
+    font-style: italic;
+    margin: 2vh;
 }
 
 .btn {
@@ -51,27 +52,4 @@ input {
     display: block;
     margin: 0 auto;
     margin-top: 50px;
-}
-
-.btn:hover {
-    background-color: #11215e;
-}
-
-.register-question {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.register-question a {
-    color: #354B9A;
-    text-decoration: none;
-}
-
-.register-question a:hover {
-    text-decoration: underline;
-}
-
-/* надо дописать класс error message */
-.error-message{
-    font-style: italic;
 }
