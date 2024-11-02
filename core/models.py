@@ -1,6 +1,5 @@
 from django.db import models
-
-from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 
 class ItemCategory(models.Model):
@@ -54,5 +53,10 @@ class ItemStep(models.Model):
         verbose_name_plural = 'Item Steps'
 
 
+class UserImage(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField()
 
-
+    class Meta:
+        verbose_name = 'User Image'
+        verbose_name_plural = 'User Images'

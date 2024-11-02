@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Item, ItemCategory, ItemIngredient, ItemStep
+from core.models import Item, ItemCategory, ItemIngredient, ItemStep, UserImage
 
 
 @admin.register(Item)
@@ -22,3 +22,7 @@ class ItemIngredient(admin.ModelAdmin):
 class ItemStep(admin.ModelAdmin):
     list_display = ('id', 'item', 'number')
 
+
+@admin.register(UserImage)
+class UserImage(admin.ModelAdmin):
+    list_display = ('id', 'user', 'image')

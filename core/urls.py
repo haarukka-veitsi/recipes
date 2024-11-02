@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('add_item', views.AddItemView.as_view(), name='add_item'),
+    path('profile_image/', views.ProfileImageView.as_view(), name='profile_image')
 ]

@@ -4,10 +4,9 @@ from django.views import View
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-from django.forms import modelformset_factory
 
-from core.models import Item, ItemIngredient, ItemStep
-from core.forms import ItemForm, ItemIngredientForm, ItemStepForm
+from core.models import Item, ItemIngredient, ItemStep, UserImage
+from core.forms import ItemForm, ItemIngredientForm, ItemStepForm, UserImageForm
 
 
 class CatalogueView(View):
@@ -89,10 +88,49 @@ class LogoutView(View):
 
 class ProfileView(View):
     def get(self, request):
+        try:
+            image = UserImage.objects.get(user=request.user).image
+        except UserImage.DoesNotExist:
+            image = None
+
         context = {
             'items': Item.objects.all().order_by('-id'),
+            'image': image,
         }
         return render(request, 'core/profile.html', context)
+
+
+class ProfileImageView(View):
+    def get(self, request):
+        if request.user.is_anonymous:
+            return redirect('core:authorize')
+
+        try:
+            user_image = UserImage.objects.get(user=request.user)
+        except UserImage.DoesNotExist:
+            user_image = None
+
+        form = UserImageForm(instance=user_image)
+
+        return render(request, 'core/add_item.html', {'form': form})
+
+
+    def post(self, request):
+        try:
+            user_image = UserImage.objects.get(user=request.user)
+        except UserImage.DoesNotExist:
+            user_image = None
+
+        form = UserImageForm(request.POST, request.FILES, instance=user_image)
+
+        if form.is_valid():
+            user_image = form.save(commit=False)
+            user_image.user = request.user
+            user_image.save()
+            return redirect('core:profile')
+
+        return render(request, 'core/add_item.html', {'form': form})
+
 
 
 class AddItemView(View):
@@ -114,7 +152,7 @@ class AddItemView(View):
         step = request.session.get('form_step', 1)
 
         if step == 1:
-            form = ItemForm(request.POST)
+            form = ItemForm(request.POST, request.FILES)
             if form.is_valid():
                 item = form.save()
                 request.session['item_id'] = item.id
@@ -131,7 +169,7 @@ class AddItemView(View):
                 return redirect('core:add_item')
 
         elif step == 3:
-            form = ItemStepForm(request.POST)
+            form = ItemStepForm(request.POST, request.FILES)
             if form.is_valid():
                 step_instance = form.save(commit=False)
                 step_instance.item_id = request.session.get('item_id')

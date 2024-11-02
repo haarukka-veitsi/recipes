@@ -14,7 +14,13 @@
 {% block base_content %}
 
     <div class="profile-container">
-        <img src="{% static 'core/images/profile.png' %}" alt="Фотография пользователя" class="profile-photo">
+        <a href="{% url 'core:profile_image' %}">
+            {% if image %}
+                <img src="{{ image.url }}" alt="Фотография пользователя" class="profile-photo">
+            {% else %}
+                <img src="{% static 'core/images/profile.png' %}" alt="Фотография пользователя" class="profile-photo">
+            {% endif %}
+        </a>
         <div class="info-container">
             <div class="name-container">
                 <h1 class="name">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
