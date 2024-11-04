@@ -15,8 +15,9 @@
     <div class="content">
         <div class="recipe-container">
             <h1 class="recipe">{{ item.name }}</h1>
-
-<!--            <p class="author">Автор: Имя Автора</p>-->
+            {% if item.author %}
+                <p class="author">Автор: {{ item.author.last_name }} {{item.author.first_name}}</p>
+            {% endif %}
 
             <div class="recipe-meta">
                 <span class="meta-item">

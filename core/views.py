@@ -135,6 +135,9 @@ class ProfileImageView(View):
 
 class AddItemView(View):
     def get(self, request):
+        if request.user.is_anonymous:
+            return redirect('core:authorize')
+
         step = request.session.get('form_step', 1)
 
         if step == 1:
@@ -154,7 +157,9 @@ class AddItemView(View):
         if step == 1:
             form = ItemForm(request.POST, request.FILES)
             if form.is_valid():
-                item = form.save()
+                item = form.save(commit=False)
+                item.author = request.user
+                item.save()
                 request.session['item_id'] = item.id
                 request.session['form_step'] = 2
                 return redirect('core:add_item')

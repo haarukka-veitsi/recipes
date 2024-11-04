@@ -19,6 +19,9 @@ class Item(models.Model):
     cooking_time = models.IntegerField(null=True, blank=True)
     servings = models.IntegerField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    author = models.ForeignKey(User,
+                               models.SET_NULL,
+                               blank=True, null=True)
     category = models.ForeignKey(ItemCategory,
                                  models.SET_NULL,
                                  blank=True, null=True)
