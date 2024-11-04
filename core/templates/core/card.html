@@ -15,5 +15,12 @@
         </div>
         <a href="{% url 'core:item' item.id %}" class="recipe-card-button">Перейти к рецепту</a>
     </div>
+    <div class="icon-container">
+        {% if profile %}
+            <a href="#"><img src="{% static 'core/images/edit.png' %}" alt="Редактировать" class="icon"></a>
+            <a href="#"><img src="{% static 'core/images/delete.png' %}" alt="Удалить" class="icon"></a>
+        {% else %}
+            <a href="#"><img src="{% static 'core/images/bookmark_not_saved.png' %}" alt="Сохранить" class="icon"></a>
+        {% endif %}
+    </div>
 </div>
-

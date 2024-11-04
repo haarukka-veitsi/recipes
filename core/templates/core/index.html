@@ -14,7 +14,7 @@
 
         <div class="container">
             {% for item in items %}
-                {% include 'core/card.html' %}
+                {% include 'core/card.html' with profile=False %}
             {% endfor %}
         </div>
 
