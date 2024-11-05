@@ -88,6 +88,9 @@ class LogoutView(View):
 
 class ProfileView(View):
     def get(self, request):
+        if request.user.is_anonymous:
+            return redirect('core:authorize')
+
         try:
             image = UserImage.objects.get(user=request.user).image
         except UserImage.DoesNotExist:
@@ -98,6 +101,20 @@ class ProfileView(View):
             'image': image,
         }
         return render(request, 'core/profile.html', context)
+
+    def post(self, request):
+        if request.user.is_anonymous:
+            return redirect('authorize')
+
+        action = request.POST['action']
+
+        if action == 'remove_item':
+            item_id = request.POST['item_to_remove']
+
+            Item.objects.get(id=item_id).delete()
+            return redirect('core:profile')
+
+        raise NotImplementedError
 
 
 class ProfileImageView(View):

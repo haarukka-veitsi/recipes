@@ -17,10 +17,25 @@
     </div>
     <div class="icon-container">
         {% if profile %}
-            <a href="#"><img src="{% static 'core/images/edit.png' %}" alt="Редактировать" class="icon"></a>
-            <a href="#"><img src="{% static 'core/images/delete.png' %}" alt="Удалить" class="icon"></a>
+            <a href="#">
+                <button>
+                    <img src="{% static 'core/images/edit.png' %}" alt="Редактировать" class="icon">
+                </button>
+            </a>
+            <form method="post">
+                {% csrf_token %}
+                    <input type="hidden" name="item_to_remove" value="{{ item.id }}">
+                    <button name="action" value="remove_item" type="submit">
+                        <img src="{% static 'core/images/remove.png' %}" alt="Удалить" class="icon">
+                    </button>
+            </form>
+<!--            <a href="#"><img src="{% static 'core/images/remove.png' %}" alt="Удалить" class="icon"></a>-->
         {% else %}
-            <a href="#"><img src="{% static 'core/images/bookmark_not_saved.png' %}" alt="Сохранить" class="icon"></a>
+            <a href="#">
+                <button>
+                    <img src="{% static 'core/images/bookmark_not_saved.png' %}" alt="Сохранить" class="icon">
+                </button>
+            </a>
         {% endif %}
     </div>
 </div>
