@@ -3,10 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib import messages
 from django.db import IntegrityError
-from django.contrib.auth.models import User
 
-from core.models import Item, ItemIngredient, ItemStep, UserImage
-from core.forms import ItemForm, ItemIngredientForm, ItemStepForm, UserImageForm
+from core.models import Item, ItemIngredient, ItemStep, User
+from core.forms import ItemForm, ItemIngredientForm, ItemStepForm, UserForm
 
 
 class CatalogueView(View):
@@ -91,10 +90,7 @@ class ProfileView(View):
         if request.user.is_anonymous:
             return redirect('core:authorize')
 
-        try:
-            image = UserImage.objects.get(user=request.user).image
-        except UserImage.DoesNotExist:
-            image = None
+        image = None
 
         context = {
             'items': Item.objects.all().order_by('-id'),
@@ -117,37 +113,27 @@ class ProfileView(View):
         raise NotImplementedError
 
 
-class ProfileImageView(View):
+class ProfileChange(View):
     def get(self, request):
         if request.user.is_anonymous:
             return redirect('core:authorize')
 
-        try:
-            user_image = UserImage.objects.get(user=request.user)
-        except UserImage.DoesNotExist:
-            user_image = None
-
-        form = UserImageForm(instance=user_image)
+        form = UserForm(instance=request.user)
 
         return render(request, 'core/add_item.html', {'form': form})
 
-
     def post(self, request):
-        try:
-            user_image = UserImage.objects.get(user=request.user)
-        except UserImage.DoesNotExist:
-            user_image = None
+        if request.user.is_anonymous:
+            return redirect('core:authorize')
 
-        form = UserImageForm(request.POST, request.FILES, instance=user_image)
+        form = UserForm(request.POST, request.FILES, instance=request.user)
 
         if form.is_valid():
-            user_image = form.save(commit=False)
-            user_image.user = request.user
-            user_image.save()
+            user = form.save()
+            user.save()
             return redirect('core:profile')
 
         return render(request, 'core/add_item.html', {'form': form})
-
 
 
 class AddItemView(View):

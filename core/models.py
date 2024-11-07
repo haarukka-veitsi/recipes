@@ -1,5 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    image = models.ImageField(upload_to='users_images', blank=True, null=True, verbose_name='Avatar')
+
+    class Meta:
+        db_table = 'User'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+
+    def __str__(self):
+        return self.username
 
 
 class ItemCategory(models.Model):
@@ -18,7 +31,7 @@ class Item(models.Model):
     description = models.TextField()
     cooking_time = models.IntegerField(null=True, blank=True)
     servings = models.IntegerField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to='items_images', null=True, blank=True)
     author = models.ForeignKey(User,
                                models.SET_NULL,
                                blank=True, null=True)
@@ -54,12 +67,3 @@ class ItemStep(models.Model):
     class Meta:
         verbose_name = 'Item Step'
         verbose_name_plural = 'Item Steps'
-
-
-class UserImage(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField()
-
-    class Meta:
-        verbose_name = 'User Image'
-        verbose_name_plural = 'User Images'

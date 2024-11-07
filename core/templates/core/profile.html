@@ -14,13 +14,11 @@
 {% block base_content %}
 
     <div class="profile-container">
-        <a href="{% url 'core:profile_image' %}">
-            {% if image %}
-                <img src="{{ image.url }}" alt="Фотография пользователя" class="profile-photo">
-            {% else %}
-                <img src="{% static 'core/images/profile.png' %}" alt="Фотография пользователя" class="profile-photo">
-            {% endif %}
-        </a>
+        {% if request.user.image %}
+            <img src="{{ request.user.image.url }}" alt="Фотография пользователя" class="profile-photo">
+        {% else %}
+            <img src="{% static 'core/images/profile.png' %}" alt="Фотография пользователя" class="profile-photo">
+        {% endif %}
         <div class="info-container">
             <div class="name-container">
                 <h1 class="name">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
@@ -28,7 +26,7 @@
             </div>
         </div>
         <div class="button-container">
-            <a href="#"><img src="{% static 'core/images/edit_profile.png' %}" alt="Изменение профиля" class="add-item"></a>
+            <a href="{% url 'core:profile_change' %}"><img src="{% static 'core/images/edit_profile.png' %}" alt="Изменение профиля" class="add-item"></a>
             <a href="{% url 'core:logout' %}"><button class="logout-button">Выйти</button></a>
         </div>
     </div>

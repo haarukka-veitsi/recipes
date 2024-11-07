@@ -1,5 +1,5 @@
 from django import forms
-from core.models import Item, ItemIngredient, ItemStep, UserImage
+from core.models import Item, ItemIngredient, ItemStep, User
 
 
 class ItemForm(forms.ModelForm):
@@ -20,7 +20,7 @@ class ItemStepForm(forms.ModelForm):
         fields = ['name', 'image', 'text']
 
 
-class UserImageForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
-        model = UserImage
-        fields = ['image']
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'image']
